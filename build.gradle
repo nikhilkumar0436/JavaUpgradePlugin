@@ -1,0 +1,32 @@
+plugins {
+    id "java"
+    id 'groovy'
+    id 'java-gradle-plugin'
+}
+
+group = "com.custom"
+version = "1.0-SNAPSHOT"
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation group: 'org.apache.ant', name: 'ant', version: '1.10.15'
+    implementation localGroovy()
+    testImplementation(platform("org.junit:junit-bom:5.9.1"))
+    testImplementation("org.junit.jupiter:junit-jupiter")
+}
+
+tasks.test {
+    useJUnitPlatform()
+}
+gradlePlugin {
+    plugins {
+        customPlugin {
+            id = "upGradeDependencies"
+            implementationClass = "com.custom.CustomPlugin"
+        }
+    }
+
+}
